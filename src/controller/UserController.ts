@@ -1,19 +1,21 @@
 import {getRepository} from "typeorm";
-import {NextFunction, Request, Response} from "express";
+import {Request, Response} from "express";
 import {User} from "../entity/User";
 import {validate} from "class-validator";
 
 const columnFilter: any = {
     select: ['id', 'username', 'role']
-}
+};
 
 export class UserController {
 
-    private static userRepo = getRepository(User);
+    private static get repo() {
+        return getRepository(User);
+    };
 
     static listAll = async (req: Request, res: Response) => {
         // get all users from db
-        const users = await UserController.userRepo.find(columnFilter);
+        const users = await UserController.repo.find(columnFilter);
 
         res.send(users);
     };
@@ -22,7 +24,7 @@ export class UserController {
         const id: string = req.params.uid;
 
         try {
-            const user = await UserController.userRepo.findOneOrFail(id, columnFilter);
+            const user = await UserController.repo.findOneOrFail(id, columnFilter);
             res.send(user);
         } catch (err) {
             console.log('exception caught.');
@@ -44,7 +46,7 @@ export class UserController {
 
         user.hashPassword();
         try {
-            await UserController.userRepo.save(user);
+            await UserController.repo.save(user);
         } catch (e) {
             console.log('save user error:', e);
             return res.status(400).send('Save created user error!');
@@ -58,7 +60,7 @@ export class UserController {
         let {username, role} = req.body;
         let user: User = null;
         try {
-            user = await UserController.userRepo.findOneOrFail(id);
+            user = await UserController.repo.findOneOrFail(id);
         } catch (e) {
             return res.status(404).send('User not found.');
         }
@@ -71,27 +73,26 @@ export class UserController {
         }
 
         try {
-            await UserController.userRepo.save(user);
+            await UserController.repo.save(user);
         } catch (e) {
             console.log('save user error:', e);
             return res.status(409).send('Username already in used.');
         }
 
         return res.status(204).send('User updated ' + username);
-    }
+    };
 
     static deleteUser = async (req: Request, res: Response) => {
         const id: string = req.params.uid;
-        let user: User = null;
         try {
-            user = await UserController.userRepo.findOneOrFail(id);
+            await UserController.repo.findOneOrFail(id);
         } catch (e) {
             return res.status(404).send('User not found.');
         }
 
-        await UserController.userRepo.delete(id);
+        await UserController.repo.delete(id);
 
         return res.status(204).send('User deleted.');
-    }
+    };
 
 }
