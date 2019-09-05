@@ -2,31 +2,31 @@ import {Router} from "express";
 import {UserController} from "../controller/UserController";
 
 const router = Router();
-const regxUserID = '[a-z0-9]';
+const regxUserID = '[a-z0-9]+';
 
-// GET: localhost:3000/api/user
+// GET: localhost:3000/users
 // Get all users
-router.get('/', UserController.listAll);
+router.get('/', UserController.getUsers);
 
 
-// GET: localhost:3000/api/user/:uid
+// GET: localhost:3000/users/:uid
 // Get user by id
-router.get(`/:uid(${regxUserID})`, UserController.getOneById);
+router.get(`/:uid(${regxUserID})`, UserController.getUserById);
 
 
-// POST: localhost:3000/api/user
+// POST: localhost:3000/users
 // Create user
-router.get('/', UserController.newUser);
+router.post('/', UserController.newUser);
 
 
-// PATCH: localhost:3000/user/api/:uid
+// PATCH: localhost:3000/users/:uid
 // Update user by id
-router.get(`/:uid(${regxUserID})`, UserController.editUser);
+router.patch(`/:uid(${regxUserID})`, UserController.editUser);
 
 
-// DELETE: localhost:3000/user/api/:uid
+// DELETE: localhost:3000/users/:uid
 // Update user by id
-router.get(`/:uid(${regxUserID})`, UserController.deleteUser);
+router.delete(`/:uid(${regxUserID})`, UserController.deleteUser);
 
 
 export default router;

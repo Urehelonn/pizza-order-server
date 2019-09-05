@@ -28,6 +28,7 @@
    "scripts": {
       "start": "set debug=* && ts-node-dev --respawn --transpileOnly ./src/index.ts",
       "tsc": "tsc",
-      "prod": "tsc && node ./node_module/typeorm/cli.js migration:run"
+      "prod": "tsc && node ./node_module/typeorm/cli.js migration:run",
+      "migration:run": "ts-node ./node_modules/typeorm/cli.js migration:run"
    }
 }

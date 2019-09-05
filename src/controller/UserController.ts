@@ -13,14 +13,14 @@ export class UserController {
         return getRepository(User);
     };
 
-    static listAll = async (req: Request, res: Response) => {
+    static getUsers = async (req: Request, res: Response) => {
         // get all users from db
         const users = await UserController.repo.find(columnFilter);
 
         res.send(users);
     };
 
-    static getOneById = async (req: Request, res: Response) => {
+    static getUserById = async (req: Request, res: Response) => {
         const id: string = req.params.uid;
 
         try {
