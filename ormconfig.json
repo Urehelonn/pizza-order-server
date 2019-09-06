@@ -1,7 +1,7 @@
 {
    "type": "mongodb",
    "database": "pizza",
-   "url": "mongodb+srv://yibu:passwordExample@cluster0-ymsrj.mongodb.net/test?retryWrites=true&w=majority",
+   "url": "mongodb+srv://yibu:passwordExample@cluster0-ymsrj.mongodb.net/pizza?retryWrites=true&w=majority",
    "useNewUrlParser": true,
    "synchronize": true,
    "logging": false,

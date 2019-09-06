@@ -2,6 +2,7 @@ import {getRepository} from "typeorm";
 import {Request, Response} from "express";
 import {User} from "../entity/User";
 import {validate} from "class-validator";
+import {ERRCODE, ERRSTR, PizzaError} from "../helper/Error";
 
 const columnFilter: any = {
     select: ['id', 'username', 'role']
@@ -17,7 +18,7 @@ export class UserController {
         // get all users from db
         const users = await UserController.repo.find(columnFilter);
 
-        res.send(users);
+        return res.send(new PizzaError(ERRCODE.E_OK, ERRSTR.S_OK, users));
     };
 
     static getUserById = async (req: Request, res: Response) => {
@@ -28,7 +29,8 @@ export class UserController {
             res.send(user);
         } catch (err) {
             console.log('exception caught.');
-            return res.status(404).send('User not found');
+            return res.status(ERRCODE.E_NOTFOUND).send(
+                new PizzaError(ERRCODE.E_NOTFOUND, ERRSTR.S_NOTFOUND));
         }
     };
 
@@ -41,7 +43,8 @@ export class UserController {
 
         const err = await validate(user);
         if (err.length > 0) {
-            return res.status(400).send(err);
+            return res.status(ERRCODE.E_BADREQUEST)
+                .send(new PizzaError(ERRCODE.E_BADREQUEST, ERRSTR.S_BADREQUEST));
         }
 
         user.hashPassword();
@@ -49,10 +52,12 @@ export class UserController {
             await UserController.repo.save(user);
         } catch (e) {
             console.log('save user error:', e);
-            return res.status(400).send('Save created user error!');
+            return res.status(ERRCODE.E_BADREQUEST)
+                .send(new PizzaError(ERRCODE.E_BADREQUEST, ERRSTR.S_BADREQUEST));
         }
 
-        return res.status(201).send('User created ' + username);
+        return res.status(ERRCODE.E_CREATED).send(
+            new PizzaError(ERRCODE.E_CREATED, ERRSTR.S_CREATED, username));
     };
 
     static editUser = async (req: Request, res: Response) => {
@@ -62,24 +67,28 @@ export class UserController {
         try {
             user = await UserController.repo.findOneOrFail(id);
         } catch (e) {
-            return res.status(404).send('User not found.');
+            return res.status(ERRCODE.E_NOTFOUND)
+                .send(new PizzaError(ERRCODE.E_NOTFOUND, ERRSTR.S_NOTFOUND));
         }
 
         user.username = username;
         user.role = role;
         const err = await validate(user);
         if (err.length > 0) {
-            return res.status(400).send(err)
+            return res.status(ERRCODE.E_BADREQUEST)
+                .send(new PizzaError(ERRCODE.E_BADREQUEST, ERRSTR.S_BADREQUEST));
         }
 
         try {
             await UserController.repo.save(user);
         } catch (e) {
             console.log('save user error:', e);
-            return res.status(409).send('Username already in used.');
+            return res.status(ERRCODE.E_DUPLICATE)
+                .send(new PizzaError(ERRCODE.E_DUPLICATE, ERRSTR.S_DUPLICATE));
         }
 
-        return res.status(204).send('User updated ' + username);
+        return res.status(ERRCODE.E_UPDATED)
+            .send(new PizzaError(ERRCODE.E_UPDATED, ERRSTR.S_UPDATED));
     };
 
     static deleteUser = async (req: Request, res: Response) => {
@@ -87,12 +96,14 @@ export class UserController {
         try {
             await UserController.repo.findOneOrFail(id);
         } catch (e) {
-            return res.status(404).send('User not found.');
+            return res.status(ERRCODE.E_NOTFOUND)
+                .send(new PizzaError(ERRCODE.E_NOTFOUND, ERRSTR.S_NOTFOUND));
         }
 
         await UserController.repo.delete(id);
 
-        return res.status(204).send('User deleted.');
+        return res.status(ERRCODE.E_UPDATED)
+            .send(new PizzaError(ERRCODE.E_UPDATED, `User with id ${id} deleted.`));
     };
 
 }

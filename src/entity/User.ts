@@ -19,7 +19,7 @@ export class User {
 
     @Column()
     @IsNotEmpty()
-    role: string;
+    role: string[];
 
     @Column()
     @CreateDateColumn()

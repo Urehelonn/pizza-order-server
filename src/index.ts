@@ -8,6 +8,7 @@ import * as helmet from 'helmet';
 import {NextFunction, Request, Response} from "express";
 import routes from './routes';
 
+const HOSTPORT = 3838;
 createConnection().then(async connection => {
 
     // create express app
@@ -26,9 +27,9 @@ createConnection().then(async connection => {
     // setup express app here
 
     // start express server
-    app.listen(3000);
+    app.listen(HOSTPORT);
 
 
-    console.log("Express server has started on port 3000. Open http://localhost:3000/ to see results");
+    console.log(`Express server has started on port ${HOSTPORT}. Open http://localhost:${HOSTPORT}/ to see results`);
 
 }).catch(error => console.log(error));
