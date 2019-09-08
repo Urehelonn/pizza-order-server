@@ -18,7 +18,7 @@ router.get(`/:uid(${regxUserID})`, [checkJwt, checkRole(['admin'])], UserControl
 
 // POST: localhost:3838/users
 // Create user
-router.post('/', [checkJwt, checkRole(['admin'])], UserController.newUser);
+router.post('/', UserController.newUser);
 
 
 // PATCH: localhost:3838/users/:uid
@@ -27,8 +27,13 @@ router.patch(`/:uid(${regxUserID})`, [checkJwt, checkRole(['admin'])], UserContr
 
 
 // DELETE: localhost:3838/users/:uid
-// Update user by id
+// delete user by id
 router.delete(`/:uid(${regxUserID})`, [checkJwt, checkRole(['admin'])], UserController.deleteUser);
+
+
+// get: localhost:3838/users/checkuser/:username
+// check if username already in use
+router.get(`/checkuser/:username`, UserController.checkUsernameDuplicated);
 
 
 export default router;

@@ -57,7 +57,7 @@ export class UserController {
         }
 
         return res.status(ERRCODE.E_CREATED).send(
-            new PizzaError(ERRCODE.E_CREATED, ERRSTR.S_CREATED, username));
+            new PizzaError(ERRCODE.E_CREATED, ERRSTR.S_CREATED, user));
     };
 
     static editUser = async (req: Request, res: Response) => {
@@ -106,4 +106,19 @@ export class UserController {
             .send(new PizzaError(ERRCODE.E_UPDATED, `User with id ${id} deleted.`));
     };
 
+    static checkUsernameDuplicated = async (req: Request, res: Response) => {
+        const username: string = req.params.username;
+        try {
+            const counter = await UserController.repo.count({username: username});
+            return res.status(ERRCODE.E_OK,).send(new PizzaError(
+                ERRCODE.E_OK,
+                ERRSTR.S_OK,
+                counter
+            ));
+        } catch (err) {
+            console.log(err);
+            return res.status(ERRCODE.E_DBERROR).send(
+                new PizzaError(ERRCODE.E_DBERROR, ERRSTR.S_DBERR));
+        }
+    }
 }

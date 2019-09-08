@@ -23,7 +23,7 @@ export class AuthController {
             user = await AuthController.repo.findOneOrFail({where: {username}})
         } catch (e) {
             return res.status(ERRCODE.E_NOTFOUND).send(new PizzaError(ERRCODE.E_NOTFOUND,
-                ERRSTR.S_NOTFOUND))
+               'Cannot find user.'))
         }
 
         if (!user.checkIfUnencryptedPasswordValid(password)) {

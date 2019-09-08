@@ -6,6 +6,7 @@ export enum ERRCODE {
     E_UNAUTHORIZED = 401,
     E_NOTFOUND = 404,
     E_DUPLICATE = 409,
+    E_DBERROR = 500
 }
 
 export enum ERRSTR {
@@ -16,7 +17,8 @@ export enum ERRSTR {
     S_UNAUTHORIZED = 'Unauthorized',
     S_WRONGPASSWORD = 'Cannot find username and password combination.',
     S_NOTFOUND = 'Not found',
-    S_DUPLICATE = 'Username already exist.'
+    S_DUPLICATE = 'Username already exist.',
+    S_DBERR = 'Internal error when accessing database'
 }
 
 export class PizzaError {
