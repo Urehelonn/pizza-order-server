@@ -12,7 +12,7 @@ export class ToppingController {
 
     static getToppings = async (req: Request, res: Response) => {
         const toppings = await ToppingController.repo.find();
-        return res.send(toppings);
+        return res.send(new PizzaError(ERRCODE.E_OK,ERRSTR.S_OK,toppings));
     };
 
     static checkToppingExisted = async (req: Request, res: Response) => {

@@ -5,7 +5,7 @@ import {validate} from "class-validator";
 import {ERRCODE, ERRSTR, PizzaError} from "../helper/Error";
 
 const columnFilter: any = {
-    select: ['id', 'username', 'role']
+    select: ["id", "username", "role"]
 };
 
 export class UserController {
@@ -23,7 +23,6 @@ export class UserController {
 
     static getUserById = async (req: Request, res: Response) => {
         const id: string = req.params.uid;
-
         try {
             const user = await UserController.repo.findOneOrFail(id, columnFilter);
             res.send(user);

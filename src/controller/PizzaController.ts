@@ -19,7 +19,7 @@ export class PizzaController {
         // get all users from db
         const pizzas = await PizzaController.repo.find(columnFilter);
 
-        return res.send(pizzas);
+        return res.send(new PizzaError(ERRCODE.E_OK,ERRSTR.S_OK,pizzas));
     };
 
     static checkPizzaExisted = async (req: Request, res: Response) => {

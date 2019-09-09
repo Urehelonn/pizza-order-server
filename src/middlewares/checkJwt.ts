@@ -6,6 +6,8 @@ export const checkJwt = (req: Request, res: Response, next: NextFunction) => {
     const token = <string>req.headers['authorization'];
     let jwtPayload = null;
 
+    console.log(token);
+
     //validate token first
     try{
         jwtPayload = <any>jwt.verify(token, config.jwtSecret);
@@ -20,8 +22,6 @@ export const checkJwt = (req: Request, res: Response, next: NextFunction) => {
         config.jwtSecret,
         {'expiresIn': '1h'}
     );
-
     res.setHeader('token', newToken);
-
     next();
 };

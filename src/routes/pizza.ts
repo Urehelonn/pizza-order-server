@@ -12,7 +12,7 @@ router.post('/', [checkJwt, checkRole(['admin'])],
     PizzaController.newPizza);
 router.get('/checkDuplicate/:name', PizzaController.checkPizzaExisted);
 router.patch(`/:id(${regxCategoryId})`,
-    [checkJwt], PizzaController.editPizza);
+    [checkJwt, checkRole(['admin'])], PizzaController.editPizza);
 router.delete(`/:id(${regxCategoryId})`,
     [checkJwt, checkRole(['admin'])], PizzaController.deletePizza);
 
