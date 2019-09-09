@@ -11,6 +11,10 @@ export class AuthController {
         return getRepository(User);
     }
 
+    static checkToken = async (req: Request, res: Response) => {
+        return res.status(ERRCODE.E_OK).send(new PizzaError(ERRCODE.E_OK, 'Token check passed.'));
+    }
+
     static login = async (req: Request, res: Response) => {
         let {username, password} = req.body;
         if (!(username && password)) {
@@ -23,7 +27,7 @@ export class AuthController {
             user = await AuthController.repo.findOneOrFail({where: {username}})
         } catch (e) {
             return res.status(ERRCODE.E_NOTFOUND).send(new PizzaError(ERRCODE.E_NOTFOUND,
-               'Cannot find user.'))
+                'Cannot find user.'))
         }
 
         if (!user.checkIfUnencryptedPasswordValid(password)) {

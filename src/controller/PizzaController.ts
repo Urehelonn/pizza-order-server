@@ -19,7 +19,7 @@ export class PizzaController {
         // get all users from db
         const pizzas = await PizzaController.repo.find(columnFilter);
 
-        return res.send(new PizzaError(ERRCODE.E_OK,ERRSTR.S_OK,pizzas));
+        return res.send(new PizzaError(ERRCODE.E_OK, ERRSTR.S_OK, pizzas));
     };
 
     static checkPizzaExisted = async (req: Request, res: Response) => {
@@ -85,7 +85,7 @@ export class PizzaController {
             toppings, name, desc, img, type, profiles,
             category, inStock, deleted, currency, halal
         } = req.body;
-        let pizza = new Pizza(name, toppings, desc,
+        let pizza = new Pizza(toppings, name, desc,
             img, type, profiles, category, inStock,
             deleted, currency, halal);
         pizza.id = oldPizza.id;
