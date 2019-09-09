@@ -13,8 +13,8 @@ export class Pizza extends Product {
     toppings: string[]
 
     constructor(
-        name: string,
         toppings: string[],
+        name: string,
         desc: string,
         img: string,
         type: ProductType = ProductType.product,
@@ -29,6 +29,7 @@ export class Pizza extends Product {
     ){
         super(name, desc, img, type, profiles,
             category, inStock, deleted, currency);
+        this.toppings = toppings;
         this.halal = halal;
     }
 

@@ -8,6 +8,7 @@ const router = Router();
 
 router.get('/', ToppingController.getToppings);
 router.get('/:id', ToppingController.getToppingById);
+router.get('/:name', ToppingController.getToppingByName);
 router.post('/', [checkJwt, checkRole(['admin'])],
     ToppingController.newTopping);
 router.get('/checkDuplicate/:type', ToppingController.checkToppingExisted);

@@ -27,7 +27,6 @@ export class LotsOfModelCreated1567976741922 implements MigrationInterface {
                 [{name: 'top', price: 1.22, default: true}],
                 [{type: CategoryType.Topping, description: '', featured: true}],
                 true, false),
-
             new Topping('anchovy', '', '', ProductType.accessory,
                 [{name: 'top', price: 1.22, default: true}],
                 [{type: CategoryType.Topping, description: '', featured: false}],
@@ -82,7 +81,7 @@ export class LotsOfModelCreated1567976741922 implements MigrationInterface {
 
         let pizzaRepo = getRepository(Pizza);
         for (let i = 0; i < pizzaName.length; i++) {
-            let pizza = new Pizza(pizzaName[i], topIds, '', '',
+            let pizza = new Pizza(topIds, pizzaName[i],'', '',
                 ProductType.product, profiles,
                 [{type: CategoryType.Pizza, description: ''}], true);
             await pizzaRepo.save(pizza);

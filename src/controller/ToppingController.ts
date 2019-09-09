@@ -12,7 +12,7 @@ export class ToppingController {
 
     static getToppings = async (req: Request, res: Response) => {
         const toppings = await ToppingController.repo.find();
-        return res.send(new PizzaError(ERRCODE.E_OK, ERRSTR.S_OK, toppings));
+        return res.send(toppings);
     };
 
     static checkToppingExisted = async (req: Request, res: Response) => {
@@ -28,6 +28,18 @@ export class ToppingController {
         try {
             const category = await ToppingController.repo.findOneOrFail(id);
             res.send(category);
+        } catch (err) {
+            console.log('exception caught.');
+            return res.status(ERRCODE.E_NOTFOUND).send(
+                new PizzaError(ERRCODE.E_NOTFOUND, ERRSTR.S_NOTFOUND));
+        }
+    };
+
+    static getToppingByName = async (req: Request, res: Response) => {
+        const name: string = req.params.name;
+        try {
+            const topping = await ToppingController.repo.findOneOrFail(name);
+            res.send(topping);
         } catch (err) {
             console.log('exception caught.');
             return res.status(ERRCODE.E_NOTFOUND).send(
