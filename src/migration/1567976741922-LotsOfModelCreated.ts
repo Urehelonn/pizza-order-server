@@ -24,35 +24,35 @@ export class LotsOfModelCreated1567976741922 implements MigrationInterface {
         //Create toppings
         let toppings: Topping[] = [
             new Topping('basil', '', '', ProductType.accessory,
-                [{name: 'top', price: 1.22, default: true}],
+                [{name: 'top', price: 1.22, default: true, selected: false}],
                 [{type: CategoryType.Topping, description: '', featured: true}],
                 true, false),
             new Topping('anchovy', '', '', ProductType.accessory,
-                [{name: 'top', price: 1.22, default: true}],
+                [{name: 'top', price: 1.22, default: true, selected: false}],
                 [{type: CategoryType.Topping, description: '', featured: false}],
                 true, false),
             new Topping('mozzarella', '', '', ProductType.accessory,
-                [{name: 'top', price: 1.22, default: true}],
+                [{name: 'top', price: 1.22, default: true, selected: false}],
                 [{type: CategoryType.Topping, description: '', featured: false}],
                 true, false),
             new Topping('bacon', '', '', ProductType.accessory,
-                [{name: 'top', price: 1.22, default: true}],
+                [{name: 'top', price: 1.22, default: true, selected: false}],
                 [{type: CategoryType.Topping, description: '', featured: false}],
                 true, true),
             new Topping('olive', '', '', ProductType.accessory,
-                [{name: 'top', price: 1.22, default: true}],
+                [{name: 'top', price: 1.22, default: true, selected: false}],
                 [{type: CategoryType.Topping, description: '', featured: false}],
                 true, false),
             new Topping('onion', '', '', ProductType.accessory,
-                [{name: 'top', price: 1.22, default: true}],
+                [{name: 'top', price: 1.22, default: true, selected: false}],
                 [{type: CategoryType.Topping, description: '', featured: false}],
                 true, false),
             new Topping('tomato', '', '', ProductType.accessory,
-                [{name: 'top', price: 1.22, default: true}],
+                [{name: 'top', price: 1.22, default: true, selected: false}],
                 [{type: CategoryType.Topping, description: '', featured: false}],
                 true, true),
             new Topping('mushroom', '', '', ProductType.accessory,
-                [{name: 'top', price: 1.22, default: true}],
+                [{name: 'top', price: 1.22, default: true, selected: false}],
                 [{type: CategoryType.Topping, description: '', featured: false}],
                 true, false),
         ];
@@ -66,10 +66,10 @@ export class LotsOfModelCreated1567976741922 implements MigrationInterface {
 
         // Create Pizza
         let profiles: ProductProfile[] = [
-            {name: PizzaSizeType.S, price: 4.99, default: true},
-            {name: PizzaSizeType.M, price: 7.99, default: false},
-            {name: PizzaSizeType.L, price: 10.99, default: false},
-            {name: PizzaSizeType.XL, price: 14.99, default: false},
+            {name: PizzaSizeType.S, price: 4.99, default: true, selected: false},
+            {name: PizzaSizeType.M, price: 7.99, default: false, selected: false},
+            {name: PizzaSizeType.L, price: 10.99, default: false, selected: false},
+            {name: PizzaSizeType.XL, price: 14.99, default: false, selected: false},
         ];
         const pizzaName: string[] = [
             "Plain Ol' Pepperoni",
@@ -107,12 +107,12 @@ export class LotsOfModelCreated1567976741922 implements MigrationInterface {
         ];
 
         let drinkProfiles: ProductProfile[][] = [
-            [{price: 4.99, default: true, name: ''}],
-            [{price: 1.29, default: true, name: ''}],
-            [{price: 3.49, default: true, name: ''}],
-            [{price: 4.49, default: true, name: ''}],
-            [{price: 2.29, default: true, name: ''}],
-            [{price: 2.29, default: true, name: ''}],
+            [{price: 4.99, default: true, name: '', selected: false}],
+            [{price: 1.29, default: true, name: '', selected: false}],
+            [{price: 3.49, default: true, name: '', selected: false}],
+            [{price: 4.49, default: true, name: '', selected: false}],
+            [{price: 2.29, default: true, name: '', selected: false}],
+            [{price: 2.29, default: true, name: '', selected: false}],
         ];
 
         let drinkRepo = getRepository(Drink);

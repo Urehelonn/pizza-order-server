@@ -6,7 +6,7 @@ export const checkJwt = (req: Request, res: Response, next: NextFunction) => {
     const token = <string>req.headers['authorization'];
     let jwtPayload = null;
 
-    console.log(token);
+    // console.log(token);
 
     //validate token first
     try{
