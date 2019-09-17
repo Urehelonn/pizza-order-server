@@ -6,10 +6,9 @@ import {PizzaSizeType, ProductProfile} from "../entity/PizzaHelper";
 import {Pizza} from "../entity/Pizza";
 import {Drink} from "../entity/Drink";
 
-export class LotsOfModelCreated1567976741922 implements MigrationInterface {
+export class addModels1568698506471 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<any> {
-
         //Create categories
         let catArr: Category[] = [
             {type: CategoryType.Pizza, description: '', featured: true},
@@ -24,35 +23,36 @@ export class LotsOfModelCreated1567976741922 implements MigrationInterface {
         //Create toppings
         let toppings: Topping[] = [
             new Topping('basil', '', '', ProductType.accessory,
-                [{name: 'top', price: 1.22, default: true, selected: false}],
+                [{name: 'top', price: 1.22, default: true, selected: true}],
                 [{type: CategoryType.Topping, description: '', featured: true}],
                 true, false),
+
             new Topping('anchovy', '', '', ProductType.accessory,
-                [{name: 'top', price: 1.22, default: true, selected: false}],
+                [{name: 'top', price: 1.22, default: true, selected: true}],
                 [{type: CategoryType.Topping, description: '', featured: false}],
                 true, false),
             new Topping('mozzarella', '', '', ProductType.accessory,
-                [{name: 'top', price: 1.22, default: true, selected: false}],
+                [{name: 'top', price: 1.22, default: true, selected: true}],
                 [{type: CategoryType.Topping, description: '', featured: false}],
                 true, false),
             new Topping('bacon', '', '', ProductType.accessory,
-                [{name: 'top', price: 1.22, default: true, selected: false}],
+                [{name: 'top', price: 1.22, default: true, selected: true}],
                 [{type: CategoryType.Topping, description: '', featured: false}],
                 true, true),
             new Topping('olive', '', '', ProductType.accessory,
-                [{name: 'top', price: 1.22, default: true, selected: false}],
+                [{name: 'top', price: 1.22, default: true, selected: true}],
                 [{type: CategoryType.Topping, description: '', featured: false}],
                 true, false),
             new Topping('onion', '', '', ProductType.accessory,
-                [{name: 'top', price: 1.22, default: true, selected: false}],
+                [{name: 'top', price: 1.22, default: true, selected: true}],
                 [{type: CategoryType.Topping, description: '', featured: false}],
                 true, false),
             new Topping('tomato', '', '', ProductType.accessory,
-                [{name: 'top', price: 1.22, default: true, selected: false}],
+                [{name: 'top', price: 1.22, default: true, selected: true}],
                 [{type: CategoryType.Topping, description: '', featured: false}],
                 true, true),
             new Topping('mushroom', '', '', ProductType.accessory,
-                [{name: 'top', price: 1.22, default: true, selected: false}],
+                [{name: 'top', price: 1.22, default: true, selected: true}],
                 [{type: CategoryType.Topping, description: '', featured: false}],
                 true, false),
         ];
@@ -81,7 +81,7 @@ export class LotsOfModelCreated1567976741922 implements MigrationInterface {
 
         let pizzaRepo = getRepository(Pizza);
         for (let i = 0; i < pizzaName.length; i++) {
-            let pizza = new Pizza(topIds, pizzaName[i],'', '',
+            let pizza = new Pizza(topIds, pizzaName[i], '', '',
                 ProductType.product, profiles,
                 [{type: CategoryType.Pizza, description: ''}], true);
             await pizzaRepo.save(pizza);
@@ -121,7 +121,6 @@ export class LotsOfModelCreated1567976741922 implements MigrationInterface {
                 drinkProfiles[i], [{type: CategoryType.Drink, description: ''}], true);
             await drinkRepo.save(drink);
         }
-
     }
 
     public async down(queryRunner: QueryRunner): Promise<any> {
