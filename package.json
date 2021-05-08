@@ -23,7 +23,7 @@
       "mongodb": "^3.0.8",
       "reflect-metadata": "^0.1.10",
       "ts-node-dev": "^1.0.0-pre.42",
-      "typeorm": "0.2.18"
+      "typeorm": "0.2.25"
    },
    "scripts": {
       "start": "set debug=* && ts-node-dev --respawn --transpileOnly ./src/index.ts",
